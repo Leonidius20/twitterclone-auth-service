@@ -33,7 +33,7 @@ public class AuthController {
 
             return RegistrationResponse.builder().token(token).build();
         } catch (Exception e) {
-            return RegistrationResponse.builder().message("Registration failed. Username already exists or something else happened: " + e.getMessage()).build();
+            return RegistrationResponse.builder().message("Registration failed. Username already exists or something else happened").build();
         }
     }
 
