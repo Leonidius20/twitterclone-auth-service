@@ -1,4 +1,4 @@
-package io.github.leonidius20.twitterclone.authservice;
+package io.github.leonidius20.twitterclone.authservice.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

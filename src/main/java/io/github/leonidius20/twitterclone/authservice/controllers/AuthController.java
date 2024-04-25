@@ -1,10 +1,15 @@
-package io.github.leonidius20.twitterclone.authservice;
+package io.github.leonidius20.twitterclone.authservice.controllers;
 
+import io.github.leonidius20.twitterclone.authservice.dto.requests.LoginRequest;
 import io.github.leonidius20.twitterclone.authservice.dto.requests.RegistrationRequest;
+import io.github.leonidius20.twitterclone.authservice.dto.responses.LoginResponse;
 import io.github.leonidius20.twitterclone.authservice.dto.responses.RegistrationResponse;
+import io.github.leonidius20.twitterclone.authservice.entities.User;
+import io.github.leonidius20.twitterclone.authservice.repositories.UsersRepository;
 import io.github.leonidius20.twitterclone.authservice.services.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,14 +42,20 @@ public class AuthController {
         }
     }
 
-    /*@GetMapping("/login")
-    public boolean login(String username, String password) {
-        return repo.findByUsernameAndPassword(username, password).isPresent();
-    }
+    @PostMapping("/login")
+    public LoginResponse login(@RequestBody LoginRequest loginRequest) {
+        var username = repo.findByUsername(loginRequest.getUsername());
 
-    @GetMapping("/search")
-    public boolean search(String username) {
-        return repo.findByUsername(username).isPresent();
-    }*/
+        if (username == null) {
+            return LoginResponse.builder().message("Invalid username or/and password").build();
+        }
+
+        if (passwordEncoder.matches(loginRequest.getPassword(), username.getPasswordHash())) {
+            String token = jwtService.generateToken(username);
+            return LoginResponse.builder().token(token).build();
+        } else {
+            return LoginResponse.builder().message("Invalid username or/and password").build();
+        }
+    }
 
 }

@@ -1,6 +1,6 @@
 package io.github.leonidius20.twitterclone.authservice.services;
 
-import io.github.leonidius20.twitterclone.authservice.User;
+import io.github.leonidius20.twitterclone.authservice.entities.User;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
