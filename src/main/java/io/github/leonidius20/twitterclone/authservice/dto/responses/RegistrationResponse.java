@@ -1,19 +1,14 @@
 package io.github.leonidius20.twitterclone.authservice.dto.responses;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+
+@AllArgsConstructor
+@Builder
 public class RegistrationResponse {
 
-    Integer id;
+    String token;
 
     String message;
-
-    public RegistrationResponse(int id) {
-        this.id = id;
-        this.message = "User registered successfully";
-    }
-
-    public RegistrationResponse(String message) {
-        this.id = null;
-        this.message = message;
-    }
 
 }
