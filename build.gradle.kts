@@ -28,6 +28,17 @@ dependencies {
     runtimeOnly("org.postgresql:postgresql")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+    // security
+    implementation("org.springframework.boot:spring-boot-starter-security")
+
+    // jwt
+    val jjwtVersion = "0.12.5"
+    implementation("io.jsonwebtoken:jjwt-api:$jjwtVersion")
+    implementation("io.jsonwebtoken:jjwt-impl:$jjwtVersion")
+    implementation("io.jsonwebtoken:jjwt-jackson:$jjwtVersion")
+
+
 }
 
 tasks.withType<Test> {
